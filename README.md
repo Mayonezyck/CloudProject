@@ -24,3 +24,12 @@ The UI will have a canvas to show the image uploaded by the user, and will have 
 
 ***Expect all of the above to change and evolve, this is just to kickstart.*** 
  
+----------------------------------------------------------------------------
+2023-04-02
+
+To launch the model, the container image can be found at codait/max-image-caption-generator
+
+The service should be exposed to port 5000 or it would not work.
+
+Another microservice would be used to host a server that allows the user to upload the file and pass the file to the port, receive the returned information and show them on the screen along with the image.
+

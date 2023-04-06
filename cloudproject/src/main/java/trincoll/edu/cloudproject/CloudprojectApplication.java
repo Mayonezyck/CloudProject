@@ -1,13 +1,13 @@
-package trincoll.edu.imagegenui;
+package trincoll.edu.cloudproject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ImagegenuiApplication {
+public class CloudprojectApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ImagegenuiApplication.class, args);
+		SpringApplication.run(CloudprojectApplication.class, args);
 	}
 
 }

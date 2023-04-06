@@ -1,10 +1,10 @@
-package trincoll.edu.imagegenui;
+package trincoll.edu.cloudproject;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ImagegenuiApplicationTests {
+class CloudprojectApplicationTests {
 
 	@Test
 	void contextLoads() {

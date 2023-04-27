@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, flash, url_for
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -18,9 +18,6 @@ app.config['SECRET_KEY'] = "secretKey"
 
 # Creating an SQLAlchemy instance
 db = SQLAlchemy(app)
- 
-
-
 # Models
 class Profile(db.Model):
  
@@ -30,8 +27,7 @@ class Profile(db.Model):
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
     age = db.Column(db.Integer, nullable=False)
  
-    def __init__(self, name, first_name, last_name, age):
-        self.name = name
+    def __init__(self, first_name, last_name, age):
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
@@ -55,5 +51,26 @@ class NamerForm(FlaskForm):
 def index():
     return render_template('homepage.html', msg='Hello')
  
+@app.route('/show')
+def show_all():
+   return render_template('show_all.html', users = Profile.query.all() )
+
+
+@app.route('/new', methods = ['GET', 'POST'])
+def new():
+   if request.method == 'POST':
+      if not request.form['fname'] or not request.form['lname'] or not request.form['age']:
+         flash('Please enter all the fields', 'error')
+      else:
+         user = Profile(request.form['fname'], request.form['lname'], request.form['age'])
+         
+         db.session.add(user)
+         db.session.commit()
+         flash('Record was successfully added')
+         return redirect(url_for('show_all'))
+   return render_template('new.html')
+
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run()

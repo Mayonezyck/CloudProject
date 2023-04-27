@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+   <body>
+   
+      <h3>Profile - Flask SQLAlchemy example</h3>
+      <hr/>
+      
+      {%- for category, message in get_flashed_messages(with_categories = true) %}
+         <div class = "alert alert-danger">
+            {{ message }}
+         </div>
+      {%- endfor %}
+      
+      <form action = "{{ request.path }}" method = "post">
+         <label for = "first_name">First Name</label><br>
+         <input type = "text" name = "fname" placeholder = "Not listed" /><br>
+         <label for = "last_name">Last Name</label><br>
+         <input type = "text" name = "lname" placeholder = "Patreon" /><br>
+         <label for = "age">Age</label><br>
+         <input type = "int" name = "age" placeholder = "age" /><br>
+         <input type = "submit" value = "Submit" />
+      </form>
+      
+   </body>
+</html>

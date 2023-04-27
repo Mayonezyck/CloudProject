@@ -1,11 +1,11 @@
-from flask import Flask, request, redirect, flash, url_for
+from flask import Flask, request, redirect, flash, url_for, session
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from datetime import datetime
 from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
-
+import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__, template_folder='UI')
 app.debug = True
@@ -15,6 +15,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Secret Key
 app.config['SECRET_KEY'] = "secretKey" 
+#upload folder
+app.config['UPLOAD_FOLDER'] = os.path.join('UI','staticfiles', 'uploads')
 
 # Creating an SQLAlchemy instance
 db = SQLAlchemy(app)
@@ -55,6 +57,27 @@ def index():
 def show_all():
    return render_template('show_all.html', users = Profile.query.all() )
 
+@app.route('/use')
+def use_serv():
+    return render_template('usage.html')
+
+@app.route('/pic')
+def uploadFile():
+    return render_template('index_upload.html')
+
+@app.route('/pic',  methods=("POST", "GET"))
+def showFile():
+    if request.method == 'POST':
+        # Upload file flask
+        uploaded_img = request.files['uploaded-file']
+        # Extracting uploaded data file name
+        img_filename = secure_filename(uploaded_img.filename)
+        # Upload file to database (defined uploaded folder in static path)
+        uploaded_img.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
+        # Storing uploaded file path in flask session
+        session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
+ 
+        return render_template('image_upload_show.html')
 
 @app.route('/new', methods = ['GET', 'POST'])
 def new():
@@ -67,8 +90,16 @@ def new():
          db.session.add(user)
          db.session.commit()
          flash('Record was successfully added')
-         return redirect(url_for('show_all'))
+         return redirect(url_for('use_serv'))
    return render_template('new.html')
+
+@app.route('/show_image')
+def displayImage():
+    # Retrieving uploaded file path from session
+    img_file_path = session.get('uploaded_img_file_path', None)
+    print(img_file_path)
+    # Display image in Flask application web page
+    return render_template('show_image.html', user_image = img_file_path)
 
 if __name__ == '__main__':
     with app.app_context():

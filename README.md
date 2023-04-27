@@ -33,3 +33,4 @@ The service should be exposed to port 5000 or it would not work.
 
 Another microservice would be used to host a server that allows the user to upload the file and pass the file to the port, receive the returned information and show them on the screen along with the image.
 
+----------------------------------------------------------------------------

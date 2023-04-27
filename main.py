@@ -6,17 +6,20 @@ from datetime import datetime
 from wtforms import StringField, SubmitField
 import os
 from werkzeug.utils import secure_filename
+import requests
 
-app = Flask(__name__, template_folder='UI')
+app = Flask(__name__, template_folder='UI',static_folder='staticfiles')
 app.debug = True
- 
+
 # adding configuration for using a sqlite database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Secret Key
 app.config['SECRET_KEY'] = "secretKey" 
 #upload folder
-app.config['UPLOAD_FOLDER'] = os.path.join('UI','staticfiles', 'uploads')
+app.config['UPLOAD_FOLDER'] = os.path.join('staticfiles', 'uploads')
+#API ip
+app.config['API_IP'] = '34.70.109.113'
 
 # Creating an SQLAlchemy instance
 db = SQLAlchemy(app)
@@ -98,6 +101,17 @@ def displayImage():
     # Retrieving uploaded file path from session
     img_file_path = session.get('uploaded_img_file_path', None)
     print(img_file_path)
+    api_path = 'https://' + app.config['API_IP'] + ':5000/model/predict?image=' + img_file_path
+    headers = {
+    'accept': 'application/json',
+    # requests won't add a boundary if this header is set when you pass files=
+    #'Content-Type': 'multipart/form-data',
+    }
+
+    files = {'image': open(img_file_path, 'rb')}
+
+    response = requests.post('http://34.70.109.113:5000/model/predict', headers=headers, files=files)
+    print(response)
     # Display image in Flask application web page
     return render_template('show_image.html', user_image = img_file_path)
 

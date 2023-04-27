@@ -7,4 +7,4 @@ __pycache__/
 hello.py
 
 instance/
-UI/staticfiles
+staticfiles/

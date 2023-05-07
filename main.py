@@ -19,7 +19,7 @@ app.config['SECRET_KEY'] = "secretKey"
 #upload folder
 app.config['UPLOAD_FOLDER'] = os.path.join('staticfiles', 'uploads')
 #API ip
-app.config['API_IP'] = '34.70.109.113'
+app.config['API_IP'] = '34.170.159.210'
 
 # Creating an SQLAlchemy instance
 db = SQLAlchemy(app)
@@ -110,12 +110,18 @@ def displayImage():
 
     files = {'image': open(img_file_path, 'rb')}
 
-    response = requests.post('http://34.70.109.113:5000/model/predict', headers=headers, files=files)
-    print(response)
+    modelPath = 'http://'+app.config['API_IP']+':5000/model/predict'
+
+    with open(img_file_path,'rb') as img:
+        img_data = img.read()
+        payload = {'image': (img_file_path, img_data, 'image/png')}
+    #response = requests.post(modelPath, headers=headers, files=files)
+    response = requests.post(modelPath, files=payload)
+    print(response.content)
     # Display image in Flask application web page
-    return render_template('show_image.html', user_image = img_file_path)
+    return render_template('show_image.html', user_image = img_file_path, prediction = response.content)
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run()
+    app.run(host="0.0.0.0")

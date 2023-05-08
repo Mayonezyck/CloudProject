@@ -61,11 +61,11 @@ def show_all():
 def use_serv():
     return render_template('usage.html')
 
-@app.route('/')
+@app.route('/pic')
 def uploadFile():
     return render_template('index_upload.html')
 
-@app.route('/',  methods=("POST", "GET"))
+@app.route('/pic',  methods=("POST", "GET"))
 def showFile():
     if request.method == 'POST':
         # Upload file flask
@@ -79,7 +79,7 @@ def showFile():
  
         return render_template('image_upload_show.html')
 
-@app.route('/new', methods = ['GET', 'POST'])
+@app.route('/', methods = ['GET', 'POST'])
 def new():
    if request.method == 'POST':
       if not request.form['fname'] or not request.form['lname'] or not request.form['age']:

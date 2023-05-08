@@ -26,7 +26,7 @@ The UI will have a canvas to show the image uploaded by the user, and will have 
 
 ----------------------------------------------------------------------------
 
-![alt text](https://github.com/Mayonezyck/CloudProject/structure.svg)
+![alt text](https://github.com/Mayonezyck/CloudProject/structure.png)
 
 2023-05-07
 

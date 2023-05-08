@@ -19,7 +19,7 @@ app.config['SECRET_KEY'] = "secretKey"
 #upload folder
 app.config['UPLOAD_FOLDER'] = os.path.join('staticfiles', 'uploads')
 #API ip
-app.config['API_IP'] = '34.170.159.210'
+app.config['API_IP'] = '104.154.96.207'
 
 # Creating an SQLAlchemy instance
 db = SQLAlchemy(app)

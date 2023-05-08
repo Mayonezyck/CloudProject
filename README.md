@@ -26,7 +26,7 @@ The UI will have a canvas to show the image uploaded by the user, and will have 
 
 ----------------------------------------------------------------------------
 
-![alt text](https://github.com/Mayonezyck/CloudProject/blob/main/structure.png)
+![alt text](https://github.com/Mayonezyck/CloudProject/blob/main/Gitreadme/structure.png)
 
 ## Instruction of Using (#050807)
 

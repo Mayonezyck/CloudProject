@@ -28,6 +28,20 @@ The UI will have a canvas to show the image uploaded by the user, and will have 
 
 ![alt text](https://github.com/Mayonezyck/CloudProject/blob/main/structure.png)
 
+## Instruction of Using (#050807)
+
+On GKE, run the two manifest files
+
+>cd kubernetes
+>kubectl apply -f maxstart.yaml
+
+For now on 5/8/2023, the deployment of frontend is done by
+
+>kubectl create deployment max-image-front-deployment --image=yichengzhu/max-image_front:latest
+>kubectl expose deployment max-image-front-deployment --type=LoadBalancer --port=5000
+
+
+
 2023-05-07
 
 By the time this note is written, the repo have the for front-end microservice written in python.

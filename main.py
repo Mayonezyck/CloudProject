@@ -52,9 +52,6 @@ class NamerForm(FlaskForm):
 
 
 # function to render index page
-@app.route('/')
-def index():
-    return render_template('homepage.html', msg='Hello')
  
 @app.route('/show')
 def show_all():
@@ -64,11 +61,11 @@ def show_all():
 def use_serv():
     return render_template('usage.html')
 
-@app.route('/pic')
+@app.route('/')
 def uploadFile():
     return render_template('index_upload.html')
 
-@app.route('/pic',  methods=("POST", "GET"))
+@app.route('/',  methods=("POST", "GET"))
 def showFile():
     if request.method == 'POST':
         # Upload file flask

@@ -7,4 +7,7 @@ __pycache__/
 hello.py
 
 instance/
-staticfiles/
+*.jpg
+*.png
+staticfiles/uploads/*.png
+staticfiles/uploads/*.jpg

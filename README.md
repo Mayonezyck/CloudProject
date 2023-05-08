@@ -26,6 +26,8 @@ The UI will have a canvas to show the image uploaded by the user, and will have 
 
 ----------------------------------------------------------------------------
 
+![alt text](https://github.com/Mayonezyck/CloudProject/structure.svg)
+
 2023-05-07
 
 By the time this note is written, the repo have the for front-end microservice written in python.

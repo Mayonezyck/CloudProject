@@ -41,7 +41,7 @@ For now on 5/8/2023, the deployment of frontend is done by
 >kubectl expose deployment max-image-front-deployment --type=LoadBalancer --port=5000
 
 
-
+## Logs 
 2023-05-07
 
 By the time this note is written, the repo have the for front-end microservice written in python.

@@ -34,6 +34,10 @@ On GKE, run the all-in-one manifest file
 
 >cd kubernetes
 >kubectl apply -f apply_all.yaml
+>kubectl get all
+
+find the external ip for service/max-image-front-service
+open a browser and enter its port 5000
 
 
 

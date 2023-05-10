@@ -39,6 +39,9 @@ On GKE, run the all-in-one manifest file
 
 ## Logs 
 2023-05-09
+
+The image is now implemented with kubernetes API, roles are set.
+The image version is 051000 now.
 The auto-routing is acheived by config map!
 
 

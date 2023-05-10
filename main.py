@@ -27,7 +27,7 @@ config_map_name = "app-config"
 namespace = "default"  # Replace with your namespace if different
 config_map = v1.read_namespaced_config_map(config_map_name, namespace)
 # Retrieve the IP address from the ConfigMap data
-ip_address = config_map.data.get("ip_address")
+ip_address = config_map.data.get("max_ip")
 app.config['API_IP'] = ip_address
 
 # Creating an SQLAlchemy instance

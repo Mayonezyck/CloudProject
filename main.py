@@ -23,11 +23,12 @@ app.config['UPLOAD_FOLDER'] = os.path.join('staticfiles', 'uploads')
 
 config.load_incluster_config()
 v1 = client.CoreV1Api()
-service_name = "max-image-caption-generator"
+config_map_name = "app-config"
 namespace = "default"  # Replace with your namespace if different
-service = v1.read_namespaced_service(service_name, namespace)
-external_ip = service.status.load_balancer.ingress[0].ip
-app.config['API_IP'] = external_ip
+config_map = v1.read_namespaced_config_map(config_map_name, namespace)
+# Retrieve the IP address from the ConfigMap data
+ip_address = config_map.data.get("ip_address")
+app.config['API_IP'] = ip_address
 
 # Creating an SQLAlchemy instance
 db = SQLAlchemy(app)
@@ -61,6 +62,11 @@ class NamerForm(FlaskForm):
 
 # function to render index page
  
+
+@app.route('/iptest')
+def show_ip():
+   return render_template('homepage.html', msg = external_ip) 
+
 @app.route('/show')
 def show_all():
    return render_template('show_all.html', users = Profile.query.all() )

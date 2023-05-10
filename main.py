@@ -65,7 +65,7 @@ class NamerForm(FlaskForm):
 
 @app.route('/iptest')
 def show_ip():
-   return render_template('homepage.html', msg = external_ip) 
+   return render_template('homepage.html', msg = ip_address) 
 
 @app.route('/show')
 def show_all():

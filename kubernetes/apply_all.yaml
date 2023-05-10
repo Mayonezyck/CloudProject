@@ -82,7 +82,7 @@ spec:
       serviceAccountName: max-user
       containers:
         - name: max-image-front-container
-          image: yichengzhu/max-image_front:050905
+          image: yichengzhu/max-image_front:051000
           ports:
             - containerPort: 5000
 ---

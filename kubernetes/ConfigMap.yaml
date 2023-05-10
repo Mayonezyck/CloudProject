@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: app-config
 data:
-  max_ip: "104.154.96.207"
+  max_ip: "max-image-caption-generator"

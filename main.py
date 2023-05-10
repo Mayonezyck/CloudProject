@@ -7,6 +7,7 @@ from wtforms import StringField, SubmitField
 import os
 from werkzeug.utils import secure_filename
 import requests
+from kubernetes import client, config
 
 app = Flask(__name__, template_folder='UI',static_folder='staticfiles')
 app.debug = True
@@ -19,7 +20,14 @@ app.config['SECRET_KEY'] = "secretKey"
 #upload folder
 app.config['UPLOAD_FOLDER'] = os.path.join('staticfiles', 'uploads')
 #API ip
-app.config['API_IP'] = '104.154.96.207'
+
+config.load_incluster_config()
+v1 = client.CoreV1Api()
+service_name = "max-image-caption-generator"
+namespace = "default"  # Replace with your namespace if different
+service = v1.read_namespaced_service(service_name, namespace)
+external_ip = service.status.load_balancer.ingress[0].ip
+app.config['API_IP'] = external_ip
 
 # Creating an SQLAlchemy instance
 db = SQLAlchemy(app)

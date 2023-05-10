@@ -73,11 +73,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: max-image-front
+      app: max-image-front-deployment
   template:
     metadata:
       labels:
-        app: max-image-front
+        app: max-image-front-deployment
     spec:
       serviceAccountName: max-user
       containers:
